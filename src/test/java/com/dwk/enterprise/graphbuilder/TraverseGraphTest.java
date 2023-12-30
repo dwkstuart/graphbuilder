@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
@@ -78,5 +79,17 @@ class TraverseGraphTest {
         Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getNextNode(graph, "nodeH", data);
         Assertions.assertEquals("nodeK", nextNode);
+    }
+
+    @Test
+    void testGetVisitedList() {
+        Customer customer = new Customer();
+        customer.setAge(20);
+        customer.setFirstName("Bob");
+        Map<String, RulesData> data = Map.of("Customer", customer);
+        List<String> list = TraverseGraph.nodesVisited(graph, "nodeD", data);
+        System.out.println(list);
+        Assertions.assertEquals(4, list.size());
+        Assertions.assertTrue(list.contains("nodeD"));
     }
 }
