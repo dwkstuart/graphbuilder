@@ -44,8 +44,9 @@ public class GraphLoader {
         graphs.put(graphName, nodeMap);
 
     }
-    public Map<String, Node> getGraph(String graphJson) {
-        return graphs.get(graphJson);
+
+    public Map<String, Node> getGraph(String graphName) {
+        return graphs.get(graphName);
     }
 
 
