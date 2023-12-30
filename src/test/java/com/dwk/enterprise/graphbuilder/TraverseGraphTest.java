@@ -23,7 +23,8 @@ class TraverseGraphTest {
 
     @BeforeEach
     void init() {
-        graph = graphLoader.getGraph(JsonLoader.getGraphJson("testgraph"));
+        graphLoader.createGraph("testgraph", JsonLoader.getGraphJson("testgraph"));
+        graph = graphLoader.getGraph("testgraph");
     }
 
     @Test

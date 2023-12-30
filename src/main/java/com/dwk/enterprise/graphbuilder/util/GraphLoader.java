@@ -10,9 +10,9 @@ import com.dwk.enterprise.graphbuilder.nodes.StandardNode;
 import com.dwk.enterprise.graphbuilder.rules.Rule;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +22,9 @@ import java.util.Map;
 public class GraphLoader {
 
     private final BeanService beanService;
+    private Map<String, Map<String, Node>> graphs;
 
-    @Cacheable(cacheNames = "graphs")
-    public Map<String, Node> getGraph(String graphJson) {
-
-
+    public void createGraph(String graphName, String graphJson) {
         Gson gson = new Gson();
         GraphDto dtoList = gson.fromJson(graphJson, GraphDto.class);
 
@@ -40,7 +38,14 @@ public class GraphLoader {
                 default -> standardNodeAdd(nodeMap, nodeDto);
             }
         }
-        return nodeMap;
+        if (graphs == null) {
+            graphs = new HashMap<>();
+        }
+        graphs.put(graphName, nodeMap);
+
+    }
+    public Map<String, Node> getGraph(String graphJson) {
+        return graphs.get(graphJson);
     }
 
 
