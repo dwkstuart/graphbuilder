@@ -1,7 +1,5 @@
 package com.dwk.enterprise.graphbuilder.util;
 
-import com.dwk.enterprise.graphbuilder.data.GraphDto;
-import com.google.gson.Gson;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.BufferedReader;
@@ -22,7 +20,7 @@ public class JsonLoader {
         }
     }
 
-    public static String getGraphJson(String graphName){
+    public static String getGraphJson(String graphName) {
         try {
             return JsonLoader.getJsonString("flowgraphs/" + graphName + ".json");
 

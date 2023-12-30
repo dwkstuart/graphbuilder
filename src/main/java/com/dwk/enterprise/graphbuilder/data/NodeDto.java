@@ -7,9 +7,9 @@ import java.util.Map;
 @Data
 public class NodeDto {
 
+    boolean decisionNode;
+    Map<String, String> options;
     private String id;
     private String next;
-    boolean decisionNode;
     private String ruleName;
-    Map<String, String> options;
 }

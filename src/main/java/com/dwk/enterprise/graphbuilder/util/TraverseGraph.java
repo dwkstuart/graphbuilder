@@ -10,8 +10,7 @@ public abstract class TraverseGraph {
 
 
     public static String getNextNode(Map<String, Node> graph, String nodeName, Map<String, Object> data) {
-        Node node = graph.get(nodeName);
-        return node.nextNode(data);
+        return getNextStandardNode(graph, nodeName, data);
     }
 
     public static String getPreviousNode(Map<String, Node> graph, String nodeName, Map<String, Object> data) {
@@ -22,6 +21,13 @@ public abstract class TraverseGraph {
 
     private static String getFirstNodeInGraph(Map<String, Node> graph) {
         return graph.keySet().stream().findFirst().orElseThrow();
+    }
+
+    private static String getNextStandardNode(Map<String, Node> graph, String currentNode, Map<String, Object> data) {
+        Node node = graph.get(currentNode);
+        String nextNodeId = node.nextNode(data);
+        Node nextNode = graph.get(nextNodeId);
+        return nextNode instanceof DecisionNode ? getNextStandardNode(graph, nextNodeId, data) : nextNodeId;
     }
 
     private static String getBackNode(Map<String, Node> graph, String currentNode, String nodeToCheck, Map<String, Object> data) {
@@ -38,7 +44,7 @@ public abstract class TraverseGraph {
             return "ERROR";
         }
         if (nextNode.equals(nodeToCheck)) {
-            if(node instanceof DecisionNode){
+            if (node instanceof DecisionNode) {
                 return getBackNode(graph, getFirstNodeInGraph(graph), currentNode, data);
             }
             return currentNode;

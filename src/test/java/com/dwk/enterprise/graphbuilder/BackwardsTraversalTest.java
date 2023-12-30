@@ -21,28 +21,29 @@ class BackwardsTraversalTest {
     Map<String, Node> graph;
 
     @BeforeEach
-    void init(){
-        graph =graphLoader.getGraph(JsonLoader.getGraphJson("testgraph"));
+    void init() {
+        graph = graphLoader.getGraph(JsonLoader.getGraphJson("testgraph"));
     }
+
     @Test
-    void testPreviousNodeStart(){
+    void testPreviousNodeStart() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeA", data);
-        Assertions.assertTrue(nextNode.equals("nodeA"));
+        Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
-    void testPreviousNodeStandard(){
+    void testPreviousNodeStandard() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeB", data);
-        Assertions.assertTrue(nextNode.equals("nodeA"));
+        Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
-    void testPreviousNodeDecision(){
+    void testPreviousNodeDecision() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 21));
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeC", data);
-        Assertions.assertTrue(nextNode.equals("nodeB"));
+        Assertions.assertEquals("nodeB", nextNode);
     }
 
 }

@@ -18,28 +18,30 @@ class TraverseGraphTest {
     @Autowired
     GraphLoader graphLoader;
     Map<String, Node> graph;
+
     @BeforeEach
-    void init(){
-        graph =graphLoader.getGraph(JsonLoader.getGraphJson("testgraph"));
+    void init() {
+        graph = graphLoader.getGraph(JsonLoader.getGraphJson("testgraph"));
     }
+
     @Test
-    void testGetNextNode(){
+    void testGetNextNode() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
         String nextNode = TraverseGraph.getNextNode(graph, "nodeA", data);
-        Assertions.assertTrue(nextNode.equals("nodeB"));
+        Assertions.assertEquals("nodeB", nextNode);
     }
 
     @Test
-    void testDecisionNodeA(){
+    void testDecisionNodeA() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 21));
-        String nextNode = TraverseGraph.getNextNode(graph, "decisionOne", data);
-        Assertions.assertTrue(nextNode.equals("nodeC"));
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        Assertions.assertEquals("nodeC", nextNode);
     }
 
     @Test
-    void testDecisionNodeB(){
+    void testDecisionNodeB() {
         Map<String, Object> data = Map.of("Customer", Map.of("age", 18));
-        String nextNode = TraverseGraph.getNextNode(graph, "decisionOne", data);
-        Assertions.assertTrue(nextNode.equals("nodeD"));
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        Assertions.assertEquals("nodeD", nextNode);
     }
 }
