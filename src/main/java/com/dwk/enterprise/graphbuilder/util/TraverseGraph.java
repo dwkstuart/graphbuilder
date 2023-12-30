@@ -1,5 +1,6 @@
 package com.dwk.enterprise.graphbuilder.util;
 
+import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import com.dwk.enterprise.graphbuilder.nodes.DecisionNode;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 
@@ -9,11 +10,11 @@ import java.util.Map;
 public abstract class TraverseGraph {
 
 
-    public static String getNextNode(Map<String, Node> graph, String nodeName, Map<String, Object> data) {
+    public static String getNextNode(Map<String, Node> graph, String nodeName, Map<String, RulesData> data) {
         return getNextStandardNode(graph, nodeName, data);
     }
 
-    public static String getPreviousNode(Map<String, Node> graph, String nodeName, Map<String, Object> data) {
+    public static String getPreviousNode(Map<String, Node> graph, String nodeName, Map<String, RulesData> data) {
         String startingNode = getFirstNodeInGraph(graph);
 
         return getBackNode(graph, startingNode, nodeName, data);
@@ -23,14 +24,14 @@ public abstract class TraverseGraph {
         return graph.keySet().stream().findFirst().orElseThrow();
     }
 
-    private static String getNextStandardNode(Map<String, Node> graph, String currentNode, Map<String, Object> data) {
+    private static String getNextStandardNode(Map<String, Node> graph, String currentNode, Map<String, RulesData> data) {
         Node node = graph.get(currentNode);
         String nextNodeId = node.nextNode(data);
         Node nextNode = graph.get(nextNodeId);
         return nextNode instanceof DecisionNode ? getNextStandardNode(graph, nextNodeId, data) : nextNodeId;
     }
 
-    private static String getBackNode(Map<String, Node> graph, String currentNode, String nodeToCheck, Map<String, Object> data) {
+    private static String getBackNode(Map<String, Node> graph, String currentNode, String nodeToCheck, Map<String, RulesData> data) {
 
         if (currentNode.equals(nodeToCheck)) {
             return currentNode;

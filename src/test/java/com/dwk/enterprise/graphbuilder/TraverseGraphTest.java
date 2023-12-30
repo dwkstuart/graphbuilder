@@ -1,5 +1,7 @@
 package com.dwk.enterprise.graphbuilder;
 
+import com.dwk.enterprise.graphbuilder.interfaces.Customer;
+import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
 import com.dwk.enterprise.graphbuilder.util.JsonLoader;
@@ -26,21 +28,27 @@ class TraverseGraphTest {
 
     @Test
     void testGetNextNode() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
+        Customer customer = new Customer();
+        customer.setAge(20);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getNextNode(graph, "nodeA", data);
         Assertions.assertEquals("nodeB", nextNode);
     }
 
     @Test
     void testDecisionNodeA() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 21));
+        Customer customer = new Customer();
+        customer.setAge(21);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
         Assertions.assertEquals("nodeC", nextNode);
     }
 
     @Test
     void testDecisionNodeB() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 18));
+        Customer customer = new Customer();
+        customer.setAge(20);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
         Assertions.assertEquals("nodeD", nextNode);
     }

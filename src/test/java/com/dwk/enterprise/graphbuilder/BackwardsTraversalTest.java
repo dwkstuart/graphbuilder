@@ -1,5 +1,7 @@
 package com.dwk.enterprise.graphbuilder;
 
+import com.dwk.enterprise.graphbuilder.interfaces.Customer;
+import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.rules.RuleOne;
 import com.dwk.enterprise.graphbuilder.util.BeanService;
@@ -27,21 +29,27 @@ class BackwardsTraversalTest {
 
     @Test
     void testPreviousNodeStart() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
+        Customer customer = new Customer();
+        customer.setAge(20);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeA", data);
         Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
     void testPreviousNodeStandard() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 20));
+        Customer customer = new Customer();
+        customer.setAge(20);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeB", data);
         Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
     void testPreviousNodeDecision() {
-        Map<String, Object> data = Map.of("Customer", Map.of("age", 21));
+        Customer customer = new Customer();
+        customer.setAge(21);
+        Map<String, RulesData> data = Map.of("Customer", customer);
         String nextNode = TraverseGraph.getPreviousNode(graph, "nodeC", data);
         Assertions.assertEquals("nodeB", nextNode);
     }

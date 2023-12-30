@@ -1,5 +1,7 @@
 package com.dwk.enterprise.graphbuilder.rules;
 
+import com.dwk.enterprise.graphbuilder.interfaces.Customer;
+import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -8,9 +10,10 @@ import java.util.Map;
 public class RuleOne implements Rule {
 
 
-    public String getNextNode(Map<String, Object> data, Map<String, String> options) {
-        Map<String, Object> customer = (Map<String, Object>) data.get("Customer");
-        int age = (int) customer.get("age");
+    public String getNextNode(Map<String, RulesData> data, Map<String, String> options) {
+
+        Customer customer = (Customer) data.get("Customer");
+        int age = customer.getAge();
         return age > 20 ? options.get("a") : options.get("b");
     }
 }

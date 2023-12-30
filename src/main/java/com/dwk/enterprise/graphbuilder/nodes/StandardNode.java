@@ -1,5 +1,6 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
+import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ public class StandardNode implements Node {
     private String nextNode;
 
     @Override
-    public String nextNode(Map<String, Object> data) {
+    public String nextNode(Map<String, RulesData> data) {
         return nextNode;
     }
 }
