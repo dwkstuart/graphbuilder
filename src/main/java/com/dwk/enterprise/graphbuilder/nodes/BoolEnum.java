@@ -1,4 +1,7 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
-public class DecisionNode {
+public enum BoolEnum {
+
+    TRUE,
+    FALSE
 }

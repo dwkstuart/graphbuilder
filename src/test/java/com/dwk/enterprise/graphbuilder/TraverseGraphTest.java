@@ -52,4 +52,31 @@ class TraverseGraphTest {
         String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
         Assertions.assertEquals("nodeD", nextNode);
     }
+
+    @Test
+    void testBinaryCompareStringTrue() {
+        Customer customer = new Customer();
+        customer.setFirstName("Bob");
+        Map<String, RulesData> data = Map.of("Customer", customer);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
+        Assertions.assertEquals("nodeH", nextNode);
+    }
+
+    @Test
+    void testBinaryCompareFalse() {
+        Customer customer = new Customer();
+        customer.setFirstName("Jim");
+        Map<String, RulesData> data = Map.of("Customer", customer);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
+        Assertions.assertEquals("nodeI", nextNode);
+    }
+
+    @Test
+    void testBinaryCompareIntTrue() {
+        Customer customer = new Customer();
+        customer.setAge(20);
+        Map<String, RulesData> data = Map.of("Customer", customer);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", data);
+        Assertions.assertEquals("nodeK", nextNode);
+    }
 }

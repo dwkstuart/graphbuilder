@@ -7,9 +7,12 @@ import java.util.Map;
 @Data
 public class NodeDto {
 
-    boolean decisionNode;
+    NodeType nodeType = NodeType.STANDARD_NODE;
     Map<String, String> options;
     private String id;
     private String next;
     private String ruleName;
+    private String trueValue;
+    private String dataType;
+    private String fieldName;
 }

@@ -1,6 +1,5 @@
 {
-
-   "flow" : [
+  "flow": [
     {
       "id": "nodeA",
       "next": "nodeB"
@@ -11,24 +10,58 @@
     },
     {
       "id": "decisionOne",
-      "decisionNode": "true",
+      "nodeType": "COMPLEX_DECISION_NODE",
       "ruleName": "ruleOne",
       "options": {
         "a": "nodeC",
         "b": "nodeD"
       }
-    },{
+    },
+    {
       "id": "nodeC",
       "next": "nodeE"
-    },{
+    },
+    {
       "id": "nodeD",
       "next": "nodeF"
-    },{
+    },
+    {
       "id": "nodeE",
       "next": "nodeG"
-    },{
+    },
+    {
       "id": "nodeF",
       "next": "nodeG"
+    },
+    {
+      "id": "nodeG",
+      "next": "nameIsBob"
+    },
+    {
+      "id": "nameIsBob",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "options": {
+        "TRUE": "nodeH",
+        "FALSE": "nodeI"
+      },
+      "trueValue": "Bob",
+      "dataType": "Customer",
+      "fieldName": "firstName"
+    },
+    {
+      "id": "nodeH",
+      "next": "ageIs20"
+    },
+    {
+      "id": "ageIs20",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "options": {
+        "TRUE": "nodeK",
+        "FALSE": "nodeL"
+      },
+      "trueValue": 20,
+      "dataType": "Customer",
+      "fieldName": "age"
     }
   ]
 }

@@ -3,7 +3,8 @@ package com.dwk.enterprise.graphbuilder.util;
 
 import com.dwk.enterprise.graphbuilder.data.GraphDto;
 import com.dwk.enterprise.graphbuilder.data.NodeDto;
-import com.dwk.enterprise.graphbuilder.nodes.DecisionNode;
+import com.dwk.enterprise.graphbuilder.nodes.BinaryChoiceNode;
+import com.dwk.enterprise.graphbuilder.nodes.ComplexDecision;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.nodes.StandardNode;
 import com.dwk.enterprise.graphbuilder.rules.Rule;
@@ -31,13 +32,13 @@ public class GraphLoader {
 
         List<NodeDto> nodeDtoList = dtoList.getFlow();
         Map<String, Node> nodeMap = new LinkedHashMap<>();
-        for (NodeDto nodeDto : nodeDtoList) {
-            if (nodeDto.isDecisionNode()) {
-                decisionNodeAdd(nodeMap, nodeDto);
-            } else {
-                standardNodeAdd(nodeMap, nodeDto);
-            }
 
+        for (NodeDto nodeDto : nodeDtoList) {
+            switch (nodeDto.getNodeType()) {
+                case COMPLEX_DECISION_NODE -> decisionNodeAdd(nodeMap, nodeDto);
+                case BINARY_CHOICE_NODE -> binaryDecisionNodeAdd(nodeMap, nodeDto);
+                default -> standardNodeAdd(nodeMap, nodeDto);
+            }
         }
         return nodeMap;
     }
@@ -50,8 +51,22 @@ public class GraphLoader {
 
     private void decisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
         Rule rule = (Rule) beanService.getBean(nodeDto.getRuleName());
-        DecisionNode decisionNode = DecisionNode.builder().id(nodeDto.getId()).options(nodeDto.getOptions()).rule(rule).build();
+        ComplexDecision decisionNode = ComplexDecision.builder().id(nodeDto.getId()).options(nodeDto.getOptions()).rule(rule).build();
         nodeMap.put(nodeDto.getId(), decisionNode);
     }
+
+    private void binaryDecisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
+        BinaryChoiceNode binaryChoiceNode =
+                BinaryChoiceNode
+                        .builder()
+                        .id(nodeDto.getId())
+                        .options(nodeDto.getOptions())
+                        .dataType(nodeDto.getDataType())
+                        .fieldName(nodeDto.getFieldName())
+                        .trueValue(nodeDto.getTrueValue())
+                        .build();
+        nodeMap.put(nodeDto.getId(), binaryChoiceNode);
+    }
+
 
 }
