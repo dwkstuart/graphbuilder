@@ -42,15 +42,6 @@ public class GraphLoader {
         return nodeMap;
     }
 
-    public String firstNodeInGraph(String graphJson) {
-        GraphDto dtoList;
-        Gson gson = new Gson();
-        dtoList = gson.fromJson(graphJson, GraphDto.class);
-        List<NodeDto> nodeDtoList = dtoList.getFlow();
-        Map<String, Node> nodeMap = getGraph(graphJson);
-
-        return nodeDtoList.get(0).getId();
-    }
 
     private void standardNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
         StandardNode standardNode = StandardNode.builder().id(nodeDto.getId()).nextNode(nodeDto.getNext()).build();
