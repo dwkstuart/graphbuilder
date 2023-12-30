@@ -1,0 +1,34 @@
+{
+
+   "flow" : [
+    {
+      "id": "nodeA",
+      "next": "nodeB"
+    },
+    {
+      "id": "nodeB",
+      "next": "decisionOne"
+    },
+    {
+      "id": "decisionOne",
+      "decisionNode": "true",
+      "ruleName": "ruleOne",
+      "options": {
+        "a": "nodeC",
+        "b": "nodeD"
+      }
+    },{
+      "id": "nodeC",
+      "next": "nodeE"
+    },{
+      "id": "nodeD",
+      "next": "nodeF"
+    },{
+      "id": "nodeE",
+      "next": "nodeG"
+    },{
+      "id": "nodeF",
+      "next": "nodeG"
+    }
+  ]
+}
