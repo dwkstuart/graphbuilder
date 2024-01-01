@@ -24,6 +24,13 @@ public class GraphLoader {
     private final BeanService beanService;
     private Map<String, Map<String, Node>> graphs;
 
+    public Map<String, Map<String, Node>> getAllGraphs() {
+        return graphs == null ?
+                new HashMap<>() : graphs;
+
+
+    }
+
     public void createGraph(String graphName, String graphJson) {
         Gson gson = new Gson();
         GraphDto dtoList = gson.fromJson(graphJson, GraphDto.class);
