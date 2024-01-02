@@ -1,27 +1,25 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
-import com.dwk.enterprise.graphbuilder.rules.Rule;
-import lombok.Builder;
 
 import java.util.List;
 import java.util.Map;
-
+import lombok.Builder;
 
 public class ComplexDecision extends DecisionNode implements Node {
 
+  private final String ruleRef;
+  private final Map<String, String> options;
 
-    private Map<String, String> options;
-    private Rule rule;
+  @Builder
+  public ComplexDecision(
+      String id, List<String> dataRefPath, String ruleRef, Map<String, String> options) {
+    super(id, dataRefPath);
+    this.ruleRef = ruleRef;
+    this.options = options;
+  }
 
-    @Builder
-    public ComplexDecision(String id, List<String> dataRefPath, Map<String, String> options, Rule rule) {
-        super(id, dataRefPath);
-        this.options = options;
-        this.rule = rule;
-    }
-
-    @Override
-    public String nextNode(String data) {
-        return rule.getNextNode(data, options);
-    }
+  @Override
+  public String nextNode(String data) {
+    return "";
+  }
 }

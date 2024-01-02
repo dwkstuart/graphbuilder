@@ -4,21 +4,17 @@ package com.dwk.enterprise.graphbuilder.util;
 import com.dwk.enterprise.graphbuilder.data.GraphDto;
 import com.dwk.enterprise.graphbuilder.data.NodeDto;
 import com.dwk.enterprise.graphbuilder.nodes.*;
-import com.dwk.enterprise.graphbuilder.rules.Rule;
 import com.google.gson.Gson;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
-@Service
+
 public class GraphLoader {
 
-    private final BeanService beanService;
+
     private Map<String, Map<String, Node>> graphs;
 
     public void createGraph(String graphName, String graphJson) {
@@ -65,8 +61,7 @@ public class GraphLoader {
     }
 
     private void decisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
-        Rule rule = (Rule) beanService.getBean(nodeDto.getRuleName());
-        ComplexDecision decisionNode = ComplexDecision.builder().id(nodeDto.getId()).options(nodeDto.getOptions()).rule(rule).build();
+        ComplexDecision decisionNode = ComplexDecision.builder().id(nodeDto.getId()).options(nodeDto.getOptions()).ruleRef(nodeDto.getRuleName()).build();
         nodeMap.put(nodeDto.getId(), decisionNode);
     }
 

@@ -33,6 +33,10 @@ public class BinaryChoiceNode extends DecisionNode implements Node {
         var value = valueAtLocation.orElseThrow();
 
         boolean response = isaBoolean(value);
+        boolean b = options.containsKey(BoolEnum.TRUE.name()) && options.containsKey(BoolEnum.FALSE.name());
+        if(!b){
+            throw new RuntimeException("no binary options provided");
+        }
         return response ? options.get(BoolEnum.TRUE.name()) : options.get(BoolEnum.FALSE.name());
     }
 

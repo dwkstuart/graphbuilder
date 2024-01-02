@@ -7,16 +7,12 @@ import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 
-@SpringBootTest
 class TraverseGraphTest {
 
-    @Autowired
-    GraphLoader graphLoader;
+    GraphLoader graphLoader = new GraphLoader();
     Map<String, Node> graph;
     String testJson = """
             {
@@ -43,7 +39,7 @@ class TraverseGraphTest {
 
     @BeforeEach
     void init() {
-        graphLoader.createGraph("testgraph", JsonLoader.getGraphJson("testgraph"));
+        graphLoader.createGraph("testgraph", JsonLoader.getGraphJsonFromResourcesFolder("testgraph"));
         graph = graphLoader.getGraph("testgraph");
     }
 

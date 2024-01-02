@@ -1,23 +1,17 @@
 package com.dwk.enterprise.graphbuilder;
 
 import com.dwk.enterprise.graphbuilder.nodes.Node;
-import com.dwk.enterprise.graphbuilder.rules.RuleOne;
-import com.dwk.enterprise.graphbuilder.util.BeanService;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
 import com.dwk.enterprise.graphbuilder.util.JsonLoader;
 import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 
-@SpringBootTest(classes = {BeanService.class, GraphLoader.class, RuleOne.class})
 class BackwardsTraversalTest {
-    @Autowired
-    GraphLoader graphLoader;
+    GraphLoader graphLoader = new GraphLoader();
     Map<String, Node> graph;
     String testJson = """
             {
@@ -33,7 +27,7 @@ class BackwardsTraversalTest {
 
     @BeforeEach
     void init() {
-        graphLoader.createGraph("testgraph", JsonLoader.getGraphJson("testgraph"));
+        graphLoader.createGraph("testgraph", JsonLoader.getGraphJsonFromResourcesFolder("testgraph"));
         graph = graphLoader.getGraph("testgraph");
     }
 
