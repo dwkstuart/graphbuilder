@@ -1,6 +1,5 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
-
 import java.util.List;
 import java.util.Map;
 import lombok.Builder;

@@ -7,11 +7,11 @@ import lombok.Data;
 @Builder
 public class StandardNode implements Node {
 
-    private String id;
-    private String nextNode;
+  private String id;
+  private String nextNode;
 
-    @Override
-    public String nextNode(String data) {
-        return nextNode;
-    }
+  @Override
+  public String nextNode(String data) {
+    return nextNode;
+  }
 }

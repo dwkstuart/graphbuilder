@@ -2,5 +2,5 @@ package com.dwk.enterprise.graphbuilder.nodes;
 
 public interface Node {
 
-    String nextNode(String data);
+  String nextNode(String data);
 }

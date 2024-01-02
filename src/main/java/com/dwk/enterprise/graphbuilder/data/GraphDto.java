@@ -1,11 +1,10 @@
 package com.dwk.enterprise.graphbuilder.data;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class GraphDto {
 
-    List<NodeDto> flow;
+  List<NodeDto> flow;
 }
