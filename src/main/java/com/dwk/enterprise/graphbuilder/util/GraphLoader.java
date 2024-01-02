@@ -67,11 +67,18 @@ public class GraphLoader {
                         .builder()
                         .id(nodeDto.getId())
                         .options(nodeDto.getOptions())
-                        .dataType(nodeDto.getDataType())
-                        .fieldName(nodeDto.getFieldName())
-                        .trueValue(nodeDto.getTrueValue())
+                        .dataRefPath(nodeDto.getDataRefPath())
+                        .trueValue(getValueToCompare(nodeDto))
+                        .operand(nodeDto.getOperand())
                         .build();
         nodeMap.put(nodeDto.getId(), binaryChoiceNode);
+    }
+
+    private Object getValueToCompare(NodeDto nodeDto) {
+        if (null != nodeDto.getDoubleValueToCompare()) return nodeDto.getDoubleValueToCompare();
+        else if (null != nodeDto.getIntValueToCompare()) return nodeDto.getIntValueToCompare();
+        else if (null != nodeDto.getStringValueToCompare()) return nodeDto.getStringValueToCompare();
+        return "";
     }
 
 

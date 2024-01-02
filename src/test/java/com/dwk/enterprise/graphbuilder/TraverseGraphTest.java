@@ -1,7 +1,5 @@
 package com.dwk.enterprise.graphbuilder;
 
-import com.dwk.enterprise.graphbuilder.interfaces.Customer;
-import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
 import com.dwk.enterprise.graphbuilder.util.JsonLoader;
@@ -20,6 +18,28 @@ class TraverseGraphTest {
     @Autowired
     GraphLoader graphLoader;
     Map<String, Node> graph;
+    String testJson = """
+            {
+                "Customer": {
+                    "firstName": "Bob",
+                    "lastName": "Dole",
+                    "age": 90,
+                    "dataType": "Customer",
+                    "addresses": [{"line1": "test"},{"line1": "test2"} ]
+                }
+            }
+            """;
+    String testJsonFalse = """
+            {
+                "Customer": {
+                    "firstName": "Jim",
+                    "lastName": "Dole",
+                    "age": 20,
+                    "dataType": "Customer",
+                    "addresses": [{"line1": "test"},{"line1": "test2"} ]
+                }
+            }
+            """;
 
     @BeforeEach
     void init() {
@@ -29,55 +49,37 @@ class TraverseGraphTest {
 
     @Test
     void testGetNextNode() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", testJson);
         Assertions.assertEquals("nodeB", nextNode);
     }
 
     @Test
     void testDecisionNodeA() {
-        Customer customer = new Customer();
-        customer.setAge(21);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJson);
         Assertions.assertEquals("nodeC", nextNode);
     }
 
     @Test
     void testDecisionNodeB() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJsonFalse);
         Assertions.assertEquals("nodeD", nextNode);
     }
 
     @Test
     void testBinaryCompareStringTrue() {
-        Customer customer = new Customer();
-        customer.setFirstName("Bob");
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJson);
         Assertions.assertEquals("nodeH", nextNode);
     }
 
     @Test
     void testBinaryCompareFalse() {
-        Customer customer = new Customer();
-        customer.setFirstName("Jim");
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJsonFalse);
         Assertions.assertEquals("nodeI", nextNode);
     }
 
     @Test
     void testBinaryCompareIntTrue() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", testJsonFalse);
         Assertions.assertEquals("nodeK", nextNode);
     }
 }

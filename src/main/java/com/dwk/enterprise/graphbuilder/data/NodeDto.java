@@ -2,6 +2,7 @@ package com.dwk.enterprise.graphbuilder.data;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -12,7 +13,9 @@ public class NodeDto {
     private String id;
     private String next;
     private String ruleName;
-    private String trueValue;
-    private String dataType;
-    private String fieldName;
+    private Integer intValueToCompare;
+    private String stringValueToCompare;
+    private Double doubleValueToCompare;
+    private List<String> dataRefPath;
+    private Operand operand;
 }

@@ -44,9 +44,12 @@
         "TRUE": "nodeH",
         "FALSE": "nodeI"
       },
-      "trueValue": "Bob",
-      "dataType": "Customer",
-      "fieldName": "firstName"
+      "stringValueToCompare": "Bob",
+      "dataRefPath": [
+        "Customer",
+        "firstName"
+      ],
+      "operand": "EQUALS"
     },
     {
       "id": "nodeH",
@@ -59,9 +62,12 @@
         "TRUE": "nodeK",
         "FALSE": "nodeL"
       },
-      "trueValue": 20,
-      "dataType": "Customer",
-      "fieldName": "age"
+      "intValueToCompare": 20,
+      "dataRefPath": [
+        "Customer",
+        "age"
+      ],
+      "operand": "EQUALS"
     }
   ]
 }
