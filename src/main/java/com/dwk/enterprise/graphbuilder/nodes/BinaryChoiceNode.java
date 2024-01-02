@@ -12,17 +12,14 @@ import java.util.Optional;
 public class BinaryChoiceNode extends DecisionNode implements Node {
 
 
-    @Builder.Default
-    private boolean isBinaryChoiceRule = true;
-    private Map<String, String> options;
-    private Object trueValue;
-    private Operand operand;
+    private final Map<String, String> options;
+    private final Object trueValue;
+    private final Operand operand;
 
 
     @Builder
     public BinaryChoiceNode(List<String> dataRefPath, String id, boolean isBinaryChoiceRule, Map<String, String> options, Object trueValue, Operand operand) {
         super(id, dataRefPath);
-        this.isBinaryChoiceRule = isBinaryChoiceRule;
         this.options = options;
         this.trueValue = trueValue;
         this.operand = operand;

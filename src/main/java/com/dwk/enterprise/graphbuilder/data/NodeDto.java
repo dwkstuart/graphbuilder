@@ -18,4 +18,5 @@ public class NodeDto {
     private Double doubleValueToCompare;
     private List<String> dataRefPath;
     private Operand operand;
+    private String exitRef;
 }

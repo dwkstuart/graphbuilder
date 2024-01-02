@@ -46,13 +46,5 @@ public abstract class JsonProcessorUtil {
         return list;
     }
 
-    public Optional<Object> getValueInMap(String json, List<String> fieldRef) {
-        ObjectMapper mapper = new ObjectMapper();
-        var map = mapper.convertValue(json, Map.class);
-        Object o = String.valueOf(map.get(fieldRef.get(0)));
-
-        return Optional.of(o);
-    }
-
 
 }

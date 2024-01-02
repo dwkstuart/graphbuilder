@@ -3,10 +3,7 @@ package com.dwk.enterprise.graphbuilder.util;
 
 import com.dwk.enterprise.graphbuilder.data.GraphDto;
 import com.dwk.enterprise.graphbuilder.data.NodeDto;
-import com.dwk.enterprise.graphbuilder.nodes.BinaryChoiceNode;
-import com.dwk.enterprise.graphbuilder.nodes.ComplexDecision;
-import com.dwk.enterprise.graphbuilder.nodes.Node;
-import com.dwk.enterprise.graphbuilder.nodes.StandardNode;
+import com.dwk.enterprise.graphbuilder.nodes.*;
 import com.dwk.enterprise.graphbuilder.rules.Rule;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +31,10 @@ public class GraphLoader {
         for (NodeDto nodeDto : nodeDtoList) {
             switch (nodeDto.getNodeType()) {
                 case COMPLEX_DECISION_NODE -> decisionNodeAdd(nodeMap, nodeDto);
+                case STANDARD_NODE -> standardNodeAdd(nodeMap, nodeDto);
                 case BINARY_CHOICE_NODE -> binaryDecisionNodeAdd(nodeMap, nodeDto);
+                case LIST_CHOICE_NODE -> listDecisionNodeAdd(nodeMap, nodeDto);
+                case TERMINAL_NODE -> terminalNodeAdd(nodeMap, nodeDto);
                 default -> standardNodeAdd(nodeMap, nodeDto);
             }
         }
@@ -43,6 +43,15 @@ public class GraphLoader {
         }
         graphs.put(graphName, nodeMap);
 
+    }
+
+    private void terminalNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
+        TerminalNode terminalNode = TerminalNode.builder()
+                .id(nodeDto.getId())
+                .dataRefPath(nodeDto.getDataRefPath())
+                .exitRef(nodeDto.getExitRef())
+                .build();
+        nodeMap.put(nodeDto.getId(), terminalNode);
     }
 
     public Map<String, Node> getGraph(String graphName) {
@@ -72,6 +81,17 @@ public class GraphLoader {
                         .operand(nodeDto.getOperand())
                         .build();
         nodeMap.put(nodeDto.getId(), binaryChoiceNode);
+    }
+
+    private void listDecisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
+        ListChoiceNode listChoiceNode =
+                ListChoiceNode
+                        .builder()
+                        .id(nodeDto.getId())
+                        .options(nodeDto.getOptions())
+                        .dataRefPath(nodeDto.getDataRefPath())
+                        .build();
+        nodeMap.put(nodeDto.getId(), listChoiceNode);
     }
 
     private Object getValueToCompare(NodeDto nodeDto) {
