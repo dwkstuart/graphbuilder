@@ -1,4 +1,4 @@
-package com.dwk.enterprise.graphbuilder.util;
+package com.dwk.enterprise.graphbuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,12 +7,12 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class JsonLoader {
+public class JsonLoaderForTest {
 
-  public static String getJsonString(String filename) throws IOException {
-    try (InputStream resource = JsonLoader.class.getClassLoader().getResourceAsStream(filename)) {
+  private static String getJsonString(String filename) throws IOException {
+    try (InputStream resource = JsonLoaderForTest.class.getClassLoader().getResourceAsStream(filename)) {
       try (BufferedReader reader =
-          new BufferedReader(new InputStreamReader(Objects.requireNonNull(resource)))) {
+                   new BufferedReader(new InputStreamReader(Objects.requireNonNull(resource)))) {
         return reader.lines().collect(Collectors.joining("\n"));
       }
     }
@@ -20,7 +20,7 @@ public class JsonLoader {
 
   public static String getGraphJsonFromResourcesFolder(String graphName) {
     try {
-      return JsonLoader.getJsonString("flowgraphs/" + graphName + ".json");
+      return getJsonString(graphName + ".json");
 
     } catch (IOException e) {
       throw new RuntimeException(e);

@@ -3,12 +3,12 @@ package com.dwk.enterprise.graphbuilder;
 import com.dwk.enterprise.graphbuilder.data.NodeResponseRecord;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
-import com.dwk.enterprise.graphbuilder.util.JsonLoader;
 import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 class TraverseGraphTest {
@@ -40,8 +40,8 @@ class TraverseGraphTest {
 
     @BeforeEach
     void init() {
-        graphLoader.createGraph("testgraph", JsonLoader.getGraphJsonFromResourcesFolder("testgraph"));
-        graph = graphLoader.getGraph("testgraph");
+        graphLoader.createGraph("test", JsonLoaderForTest.getGraphJsonFromResourcesFolder("test"));
+        graph = graphLoader.getGraph("test");
     }
 
     @Test
@@ -79,5 +79,18 @@ class TraverseGraphTest {
     void testBinaryCompareIntTrue() {
         String nextNode = TraverseGraph.getNextNode(graph, "nodeH", testJsonFalse).nextNodeId();
         Assertions.assertEquals("nodeK", nextNode);
+    }
+
+    @Test
+    void testVisitedNodesEnd() {
+        List<String> nodesVisited = TraverseGraph.nodesVisited(graph, "endNode", testJsonFalse);
+        System.out.println(nodesVisited);
+        Assertions.assertNotEquals(0, nodesVisited.size());
+    }
+
+    @Test
+    void testVisitedNodesNotFound() {
+        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> TraverseGraph.nodesVisited(graph, "nodeC", testJsonFalse));
+        Assertions.assertEquals("Node to check never visited", thrown.getMessage());
     }
 }

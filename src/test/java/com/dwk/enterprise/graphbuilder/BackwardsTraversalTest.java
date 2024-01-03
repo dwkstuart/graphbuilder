@@ -2,7 +2,6 @@ package com.dwk.enterprise.graphbuilder;
 
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
-import com.dwk.enterprise.graphbuilder.util.JsonLoader;
 import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,8 +26,8 @@ class BackwardsTraversalTest {
 
     @BeforeEach
     void init() {
-        graphLoader.createGraph("testgraph", JsonLoader.getGraphJsonFromResourcesFolder("testgraph"));
-        graph = graphLoader.getGraph("testgraph");
+        graphLoader.createGraph("test", JsonLoaderForTest.getGraphJsonFromResourcesFolder("test"));
+        graph = graphLoader.getGraph("test");
     }
 
     @Test
