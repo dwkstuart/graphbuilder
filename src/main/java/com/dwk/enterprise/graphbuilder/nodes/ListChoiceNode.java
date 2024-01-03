@@ -1,11 +1,12 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
 import com.dwk.enterprise.graphbuilder.util.JsonProcessorUtil;
+import lombok.Builder;
+
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import lombok.Builder;
 
 public class ListChoiceNode extends DecisionNode implements Node {
 
@@ -18,9 +19,9 @@ public class ListChoiceNode extends DecisionNode implements Node {
   }
 
   @Override
-  public String nextNode(String data) {
+  public String getNextNodeId(String data) {
     Optional<Object> valueAtLocation =
-        JsonProcessorUtil.getValueAtLocation(data, super.getDataRefPath());
+            JsonProcessorUtil.getValueAtLocation(data, super.getDataRefPath());
     var value = valueAtLocation.orElseThrow();
     String key = value.toString();
     boolean containsKey = options.containsKey(key);

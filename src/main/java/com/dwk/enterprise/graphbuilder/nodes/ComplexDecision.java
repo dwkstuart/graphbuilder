@@ -1,8 +1,9 @@
 package com.dwk.enterprise.graphbuilder.nodes;
 
+import lombok.Builder;
+
 import java.util.List;
 import java.util.Map;
-import lombok.Builder;
 
 public class ComplexDecision extends DecisionNode implements Node {
 
@@ -18,7 +19,7 @@ public class ComplexDecision extends DecisionNode implements Node {
   }
 
   @Override
-  public String nextNode(String data) {
+  public String getNextNodeId(String data) {
     return "";
   }
 }

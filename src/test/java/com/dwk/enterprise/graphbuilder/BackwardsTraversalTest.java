@@ -33,19 +33,19 @@ class BackwardsTraversalTest {
 
     @Test
     void testPreviousNodeStart() {
-        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeA", testJson);
+        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeA", testJson).nextNodeId();
         Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
     void testPreviousNodeStandard() {
-        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeB", testJson);
+        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeB", testJson).nextNodeId();
         Assertions.assertEquals("nodeA", nextNode);
     }
 
     @Test
     void testPreviousNodeDecision() {
-        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeC", testJson);
+        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeC", testJson).nextNodeId();
         Assertions.assertEquals("nodeB", nextNode);
     }
 

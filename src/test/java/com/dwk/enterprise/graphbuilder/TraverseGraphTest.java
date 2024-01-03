@@ -1,5 +1,6 @@
 package com.dwk.enterprise.graphbuilder;
 
+import com.dwk.enterprise.graphbuilder.data.NodeResponseRecord;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
 import com.dwk.enterprise.graphbuilder.util.JsonLoader;
@@ -45,37 +46,38 @@ class TraverseGraphTest {
 
     @Test
     void testGetNextNode() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", testJson);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", testJson).nextNodeId();
         Assertions.assertEquals("nodeB", nextNode);
     }
 
     @Test
     void testDecisionNodeA() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJson);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJson).nextNodeId();
         Assertions.assertEquals("nodeC", nextNode);
     }
 
     @Test
     void testDecisionNodeB() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJsonFalse);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJsonFalse).nextNodeId();
         Assertions.assertEquals("nodeD", nextNode);
     }
 
     @Test
     void testBinaryCompareStringTrue() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJson);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJson).nextNodeId();
         Assertions.assertEquals("nodeH", nextNode);
     }
 
     @Test
     void testBinaryCompareFalse() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJsonFalse);
-        Assertions.assertEquals("nodeI", nextNode);
+        NodeResponseRecord nodeResponse = TraverseGraph.getNextNode(graph, "nodeG", testJsonFalse);
+        Assertions.assertEquals("exit", nodeResponse.nextNodeId());
+        Assertions.assertTrue(nodeResponse.graphTraversed());
     }
 
     @Test
     void testBinaryCompareIntTrue() {
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", testJsonFalse);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", testJsonFalse).nextNodeId();
         Assertions.assertEquals("nodeK", nextNode);
     }
 }

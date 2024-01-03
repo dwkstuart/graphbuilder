@@ -47,7 +47,7 @@
       "nodeType": "BINARY_CHOICE_NODE",
       "options": {
         "TRUE": "nodeH",
-        "FALSE": "nodeI"
+        "FALSE": "endNode"
       },
       "stringValueToCompare": "Bob",
       "dataRefPath": [
@@ -73,6 +73,19 @@
         "age"
       ],
       "operand": "EQUALS"
+    },
+    {
+      "id": "nodeK",
+      "next": "endNode"
+    },
+    {
+      "id": "nodeL",
+      "next": "endNode"
+    },
+    {
+      "id": "endNode",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "exit"
     }
   ]
 }

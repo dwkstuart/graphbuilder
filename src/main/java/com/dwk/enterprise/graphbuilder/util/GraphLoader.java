@@ -41,14 +41,7 @@ public class GraphLoader {
 
     }
 
-    private void terminalNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
-        TerminalNode terminalNode = TerminalNode.builder()
-                .id(nodeDto.getId())
-                .dataRefPath(nodeDto.getDataRefPath())
-                .exitRef(nodeDto.getExitRef())
-                .build();
-        nodeMap.put(nodeDto.getId(), terminalNode);
-    }
+
 
     public Map<String, Node> getGraph(String graphName) {
         return graphs.get(graphName);
@@ -72,7 +65,7 @@ public class GraphLoader {
                         .id(nodeDto.getId())
                         .options(nodeDto.getOptions())
                         .dataRefPath(nodeDto.getDataRefPath())
-                        .trueValue(getValueToCompare(nodeDto))
+                        .comparator(getValueToCompare(nodeDto))
                         .operand(nodeDto.getOperand())
                         .build();
         nodeMap.put(nodeDto.getId(), binaryChoiceNode);
@@ -87,6 +80,14 @@ public class GraphLoader {
                         .dataRefPath(nodeDto.getDataRefPath())
                         .build();
         nodeMap.put(nodeDto.getId(), listChoiceNode);
+    }
+
+    private void terminalNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
+        TerminalNode terminalNode = TerminalNode.builder()
+                .id(nodeDto.getId())
+                .exitRef(nodeDto.getExitRef())
+                .build();
+        nodeMap.put(nodeDto.getId(), terminalNode);
     }
 
     private Object getValueToCompare(NodeDto nodeDto) {

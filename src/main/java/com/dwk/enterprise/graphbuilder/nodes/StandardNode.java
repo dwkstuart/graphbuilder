@@ -11,7 +11,7 @@ public class StandardNode implements Node {
   private String nextNode;
 
   @Override
-  public String nextNode(String data) {
+  public String getNextNodeId(String data) {
     return nextNode;
   }
 }
