@@ -4,6 +4,7 @@ package com.dwk.enterprise.graphbuilder.util;
 import com.dwk.enterprise.graphbuilder.data.GraphDto;
 import com.dwk.enterprise.graphbuilder.data.NodeDto;
 import com.dwk.enterprise.graphbuilder.nodes.*;
+import com.dwk.enterprise.graphbuilder.rule.CustomRule;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class GraphLoader {
 
 
     private Map<String, Map<String, Node>> graphs;
+    private Map<String, CustomRule> customRuleMap;
 
     public void createGraph(String graphName, String graphJson) {
         Gson gson = new Gson();
@@ -26,7 +28,7 @@ public class GraphLoader {
 
         for (NodeDto nodeDto : nodeDtoList) {
             switch (nodeDto.getNodeType()) {
-                case COMPLEX_DECISION_NODE -> decisionNodeAdd(nodeMap, nodeDto);
+                case COMPLEX_DECISION_NODE -> decisionNodeAdd(nodeMap, nodeDto, customRuleMap);
                 case STANDARD_NODE -> standardNodeAdd(nodeMap, nodeDto);
                 case BINARY_CHOICE_NODE -> binaryDecisionNodeAdd(nodeMap, nodeDto);
                 case LIST_CHOICE_NODE -> listDecisionNodeAdd(nodeMap, nodeDto);
@@ -41,6 +43,28 @@ public class GraphLoader {
 
     }
 
+    public void createGraph(String graphName, String graphJson, Map<String, CustomRule> customRuleMap) {
+        Gson gson = new Gson();
+        GraphDto dtoList = gson.fromJson(graphJson, GraphDto.class);
+
+        List<NodeDto> nodeDtoList = dtoList.getFlow();
+        Map<String, Node> nodeMap = new LinkedHashMap<>();
+
+        for (NodeDto nodeDto : nodeDtoList) {
+            switch (nodeDto.getNodeType()) {
+                case COMPLEX_DECISION_NODE -> decisionNodeAdd(nodeMap, nodeDto, customRuleMap);
+                case BINARY_CHOICE_NODE -> binaryDecisionNodeAdd(nodeMap, nodeDto);
+                case LIST_CHOICE_NODE -> listDecisionNodeAdd(nodeMap, nodeDto);
+                case TERMINAL_NODE -> terminalNodeAdd(nodeMap, nodeDto);
+                default -> standardNodeAdd(nodeMap, nodeDto);
+            }
+        }
+        if (graphs == null) {
+            graphs = new HashMap<>();
+        }
+        graphs.put(graphName, nodeMap);
+
+    }
 
 
     public Map<String, Node> getGraph(String graphName) {
@@ -53,8 +77,15 @@ public class GraphLoader {
         nodeMap.put(nodeDto.getId(), standardNode);
     }
 
-    private void decisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto) {
-        ComplexDecision decisionNode = ComplexDecision.builder().id(nodeDto.getId()).options(nodeDto.getOptions()).ruleRef(nodeDto.getRuleName()).build();
+    private void decisionNodeAdd(Map<String, Node> nodeMap, NodeDto nodeDto, Map<String, CustomRule> customRuleMap) {
+        ComplexDecision decisionNode =
+                ComplexDecision
+                        .builder()
+                        .id(nodeDto.getId())
+                        .options(nodeDto.getOptions())
+                        .ruleRef(nodeDto.getRuleName())
+                        .customRule(customRuleMap.get(nodeDto.getRuleName()))
+                        .build();
         nodeMap.put(nodeDto.getId(), decisionNode);
     }
 

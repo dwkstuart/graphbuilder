@@ -1,0 +1,34 @@
+{
+  "flow": [
+    {
+      "id": "nodeA",
+      "next": "nodeB"
+    },
+    {
+      "id": "nodeB",
+      "next": "decisionOne"
+    },
+    {
+      "id": "decisionOne",
+      "nodeType": "COMPLEX_DECISION_NODE",
+      "options": {
+        "a": "nodeC",
+        "b": "nodeD"
+      },
+      "ruleName": "TestRule"
+    },
+    {
+      "id": "nodeC",
+      "next": "endNode"
+    },
+    {
+      "id": "nodeD",
+      "next": "endNode"
+    },
+    {
+      "id": "endNode",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "exit"
+    }
+  ]
+}
