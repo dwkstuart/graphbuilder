@@ -10,17 +10,12 @@
     },
     {
       "id": "decisionOne",
-      "nodeType": "BINARY_CHOICE_NODE",
+      "nodeType": "COMPLEX_DECISION_NODE",
+      "ruleName": "ruleOne",
       "options": {
-        "TRUE": "nodeC",
-        "FALSE": "nodeD"
-      },
-      "stringValueToCompare": "Bob",
-      "dataRefPath": [
-        "Customer",
-        "firstName"
-      ],
-      "operand": "EQUALS"
+        "a": "nodeC",
+        "b": "nodeD"
+      }
     },
     {
       "id": "nodeC",

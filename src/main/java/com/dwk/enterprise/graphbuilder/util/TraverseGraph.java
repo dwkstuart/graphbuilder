@@ -54,7 +54,11 @@ public abstract class TraverseGraph {
         if (nextNode == null) {
             return "ERROR";
         }
+        if (node instanceof TerminalNode) {
+            return currentNode;
+        }
         if (nextNode.equals(nodeToCheck)) {
+
             if (node instanceof DecisionNode) {
                 return getBackNode(graph, getFirstNodeInGraph(graph), currentNode, data);
             }

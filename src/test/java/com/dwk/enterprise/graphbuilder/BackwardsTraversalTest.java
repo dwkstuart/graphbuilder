@@ -6,11 +6,15 @@ import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 
+@SpringBootTest
 class BackwardsTraversalTest {
-    GraphLoader graphLoader = new GraphLoader();
+    @Autowired
+    GraphLoader graphLoader;
     Map<String, Node> graph;
     String testJson = """
             {
@@ -44,8 +48,8 @@ class BackwardsTraversalTest {
 
     @Test
     void testPreviousNodeDecision() {
-        String nextNode = TraverseGraph.getPreviousNode(graph, "nodeC", testJson).nextNodeId();
-        Assertions.assertEquals("nodeB", nextNode);
+        String nextNode = TraverseGraph.getPreviousNode(graph, "endNode", testJson).nextNodeId();
+        Assertions.assertEquals("nodeL", nextNode);
     }
 
 }
