@@ -6,6 +6,7 @@ import lombok.Builder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -27,8 +28,9 @@ public class BinaryChoiceNode extends DecisionNode implements Node {
 
     @Override
     public String getNextNodeId(String data) {
-        Optional<Object> valueAtLocation = JsonProcessorUtil.getValueAtLocation(data, super.getDataRefPath());
-        var value = valueAtLocation.orElseThrow();
+        List<String> dataRefPath = super.getDataRefPath();
+        Optional<Object> valueAtLocation = JsonProcessorUtil.getValueAtLocation(data, dataRefPath);
+        var value = valueAtLocation.orElseThrow(()-> new NoSuchElementException("No such value found at" + dataRefPath));
 
         boolean response = evaluateValueAgainstComparator(value);
         boolean b = options.containsKey(BoolEnum.TRUE.name()) && options.containsKey(BoolEnum.FALSE.name());

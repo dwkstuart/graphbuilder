@@ -1,7 +1,8 @@
 package com.dwk.enterprise.graphbuilder.data;
 
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class GraphDto {

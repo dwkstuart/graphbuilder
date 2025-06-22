@@ -1,0 +1,95 @@
+{
+  "client": {
+    "type": "individual",
+    "income": {
+      "annual": 2500000
+    },
+    "assets": {
+      "liquid": 15000000,
+      "total": 50000000,
+      "business_ownership": 25000000,
+      "real_estate": 10000000,
+      "appreciating": true,
+      "exemption_amount": 15000000,
+      "long_term_care": 0,
+      "foreign_accounts": 500000
+    },
+    "goals": {
+      "legacy": true,
+      "charitable": true,
+      "wealth_transfer": true,
+      "income_tax_benefits": true,
+      "flexibility": true,
+      "dynasty_planning": true,
+      "charitable_integration": true,
+      "deduction_benefit": true,
+      "life_insurance_integration": true,
+      "irrevocable_life_insurance": true,
+      "premium_financing": true,
+      "leverage_benefits": true,
+      "estate_tax_elimination": true,
+      "wealth_preservation": true,
+      "legacy_maximization": true
+    },
+    "family": {
+      "children": 3,
+      "generation_skipping": true
+    },
+    "business": {
+      "employees": 150,
+      "valuation": 25000000
+    },
+    "tax": {
+      "bracket": 37,
+      "capital_gains": 5000000
+    },
+    "real_estate": {
+      "commercial": 8000000,
+      "depreciation": 2000000
+    },
+    "timeline": {
+      "sale_planned": 2
+    },
+    "goals": {
+      "income_stream": true
+    },
+    "age": 58,
+    "retirement": {
+      "social_security": 45000
+    },
+    "marital_status": "married",
+    "spouse": {
+      "age": 55
+    },
+    "goals": {
+      "maximize_benefits": true
+    },
+    "health": {
+      "life_expectancy": 90,
+      "pre_existing_conditions": false
+    },
+    "jurisdiction": {
+      "trust_friendly": true,
+      "asset_protection_friendly": true
+    },
+    "compliance": {
+      "fbar_requirements": true
+    },
+    "risk_tolerance": {
+      "international": 8
+    },
+    "profession": {
+      "high_risk": true
+    },
+    "insurance": {
+      "malpractice": 2000000
+    },
+    "goals": {
+      "creditor_protection": true,
+      "income_tax_optimization": true
+    },
+    "charitable": {
+      "deduction_benefit": true
+    }
+  }
+}

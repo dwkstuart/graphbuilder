@@ -1,0 +1,894 @@
+{
+  "flow": [
+    {
+      "id": "welcome",
+      "nodeType": "STANDARD_NODE",
+      "next": "client_type"
+    },
+    {
+      "id": "client_type",
+      "nodeType": "LIST_CHOICE_NODE",
+      "dataRefPath": ["client", "type"],
+      "options": {
+        "individual": "individual_income",
+        "business": "business_type",
+        "retirement": "retirement_age",
+        "estate": "estate_value"
+      }
+    },
+    {
+      "id": "individual_income",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "income", "annual"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 100000,
+      "options": {
+        "TRUE": "high_income_tax",
+        "FALSE": "standard_income_tax"
+      }
+    },
+    {
+      "id": "high_income_tax",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "income", "annual"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 500000,
+      "options": {
+        "TRUE": "ultra_high_income",
+        "FALSE": "high_income_investment"
+      }
+    },
+    {
+      "id": "ultra_high_income",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "liquid"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 1000000,
+      "options": {
+        "TRUE": "private_wealth_management",
+        "FALSE": "high_net_worth_planning"
+      }
+    },
+    {
+      "id": "private_wealth_management",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "legacy"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "estate_planning_comprehensive",
+        "FALSE": "investment_management_premium"
+      }
+    },
+    {
+      "id": "estate_planning_comprehensive",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "family", "children"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "trust_setup_children",
+        "FALSE": "charitable_giving_strategy"
+      }
+    },
+    {
+      "id": "trust_setup_children",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "family", "children"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 2,
+      "options": {
+        "TRUE": "complex_trust_structure",
+        "FALSE": "simple_family_trust"
+      }
+    },
+    {
+      "id": "complex_trust_structure",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "business_ownership"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "business_succession_planning",
+        "FALSE": "family_limited_partnership"
+      }
+    },
+    {
+      "id": "business_succession_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "business", "employees"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 50,
+      "options": {
+        "TRUE": "esop_planning",
+        "FALSE": "family_business_transition"
+      }
+    },
+    {
+      "id": "esop_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "business", "valuation"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 10000000,
+      "options": {
+        "TRUE": "complex_esop_structure",
+        "FALSE": "standard_esop_setup"
+      }
+    },
+    {
+      "id": "complex_esop_structure",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "tax", "bracket"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 37,
+      "options": {
+        "TRUE": "tax_optimization_strategy",
+        "FALSE": "standard_esop_implementation"
+      }
+    },
+    {
+      "id": "tax_optimization_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "charitable"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "charitable_remainder_trust",
+        "FALSE": "qualified_personal_residence_trust"
+      }
+    },
+    {
+      "id": "charitable_remainder_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "real_estate"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "real_estate_trust",
+        "FALSE": "cash_charitable_trust"
+      }
+    },
+    {
+      "id": "real_estate_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "real_estate", "commercial"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "commercial_property_trust",
+        "FALSE": "residential_property_trust"
+      }
+    },
+    {
+      "id": "commercial_property_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "real_estate", "depreciation"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "depreciation_recapture_strategy",
+        "FALSE": "like_kind_exchange_planning"
+      }
+    },
+    {
+      "id": "depreciation_recapture_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "timeline", "sale_planned"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "immediate_sale_strategy",
+        "FALSE": "deferred_sale_planning"
+      }
+    },
+    {
+      "id": "immediate_sale_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "tax", "capital_gains"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "installment_sale_planning",
+        "FALSE": "1031_exchange_analysis"
+      }
+    },
+    {
+      "id": "installment_sale_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "income_stream"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "structured_settlement_trust",
+        "FALSE": "deferred_compensation_plan"
+      }
+    },
+    {
+      "id": "structured_settlement_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "age"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 65,
+      "options": {
+        "TRUE": "retirement_income_optimization",
+        "FALSE": "pre_retirement_planning"
+      }
+    },
+    {
+      "id": "retirement_income_optimization",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "retirement", "social_security"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "social_security_strategy",
+        "FALSE": "pension_optimization"
+      }
+    },
+    {
+      "id": "social_security_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "marital_status"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "married",
+      "options": {
+        "TRUE": "spousal_benefit_optimization",
+        "FALSE": "individual_benefit_optimization"
+      }
+    },
+    {
+      "id": "spousal_benefit_optimization",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "spouse", "age"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 62,
+      "options": {
+        "TRUE": "file_and_suspend_strategy",
+        "FALSE": "restricted_application_planning"
+      }
+    },
+    {
+      "id": "file_and_suspend_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "maximize_benefits"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "advanced_social_security_planning",
+        "FALSE": "standard_benefit_optimization"
+      }
+    },
+    {
+      "id": "advanced_social_security_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "health", "life_expectancy"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 85,
+      "options": {
+        "TRUE": "longevity_planning",
+        "FALSE": "standard_life_expectancy_planning"
+      }
+    },
+    {
+      "id": "longevity_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "long_term_care"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 0,
+      "options": {
+        "TRUE": "long_term_care_insurance_analysis",
+        "FALSE": "self_insurance_strategy"
+      }
+    },
+    {
+      "id": "long_term_care_insurance_analysis",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "health", "pre_existing_conditions"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "hybrid_life_insurance_strategy",
+        "FALSE": "traditional_life_insurance_analysis"
+      }
+    },
+    {
+      "id": "hybrid_life_insurance_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "legacy"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "irrevocable_life_insurance_trust",
+        "FALSE": "life_insurance_beneficiary_planning"
+      }
+    },
+    {
+      "id": "irrevocable_life_insurance_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "family", "generation_skipping"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "generation_skipping_trust_planning",
+        "FALSE": "standard_trust_planning"
+      }
+    },
+    {
+      "id": "generation_skipping_trust_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "exemption_amount"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 12000000,
+      "options": {
+        "TRUE": "dynasty_trust_planning",
+        "FALSE": "standard_generation_skipping_trust"
+      }
+    },
+    {
+      "id": "dynasty_trust_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "perpetual_wealth"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "perpetual_trust_structure",
+        "FALSE": "term_trust_planning"
+      }
+    },
+    {
+      "id": "perpetual_trust_structure",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "jurisdiction", "trust_friendly"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "offshore_trust_planning",
+        "FALSE": "domestic_trust_planning"
+      }
+    },
+    {
+      "id": "offshore_trust_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "compliance", "fbar_requirements"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "international_compliance_planning",
+        "FALSE": "domestic_compliance_planning"
+      }
+    },
+    {
+      "id": "international_compliance_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "foreign_accounts"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 10000,
+      "options": {
+        "TRUE": "fbar_fatca_compliance",
+        "FALSE": "standard_international_compliance"
+      }
+    },
+    {
+      "id": "fbar_fatca_compliance",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "tax_efficiency"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "offshore_tax_optimization",
+        "FALSE": "compliance_focused_planning"
+      }
+    },
+    {
+      "id": "offshore_tax_optimization",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "risk_tolerance", "international"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 7,
+      "options": {
+        "TRUE": "aggressive_international_strategy",
+        "FALSE": "conservative_international_strategy"
+      }
+    },
+    {
+      "id": "aggressive_international_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "asset_protection"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "asset_protection_trust",
+        "FALSE": "standard_offshore_trust"
+      }
+    },
+    {
+      "id": "asset_protection_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "profession", "high_risk"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "professional_liability_protection",
+        "FALSE": "standard_asset_protection"
+      }
+    },
+    {
+      "id": "professional_liability_protection",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "insurance", "malpractice"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 1000000,
+      "options": {
+        "TRUE": "excess_liability_protection",
+        "FALSE": "standard_liability_protection"
+      }
+    },
+    {
+      "id": "excess_liability_protection",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "creditor_protection"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "domestic_asset_protection_trust",
+        "FALSE": "offshore_asset_protection_trust"
+      }
+    },
+    {
+      "id": "domestic_asset_protection_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "jurisdiction", "asset_protection_friendly"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "nevada_asset_protection_trust",
+        "FALSE": "delaware_asset_protection_trust"
+      }
+    },
+    {
+      "id": "nevada_asset_protection_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "income_tax_optimization"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "nevada_incomplete_gift_trust",
+        "FALSE": "standard_nevada_trust"
+      }
+    },
+    {
+      "id": "nevada_incomplete_gift_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "appreciating"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "grantor_retained_annuity_trust",
+        "FALSE": "qualified_personal_residence_trust"
+      }
+    },
+    {
+      "id": "grantor_retained_annuity_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "wealth_transfer"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "intentionally_defective_grantor_trust",
+        "FALSE": "standard_grat_planning"
+      }
+    },
+    {
+      "id": "intentionally_defective_grantor_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "income_tax_benefits"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "spousal_lifetime_access_trust",
+        "FALSE": "standard_idgt_planning"
+      }
+    },
+    {
+      "id": "spousal_lifetime_access_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "marital_status"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "married",
+      "options": {
+        "TRUE": "slat_planning",
+        "FALSE": "individual_idgt_planning"
+      }
+    },
+    {
+      "id": "slat_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "flexibility"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "flexible_trust_structure",
+        "FALSE": "standard_slat_planning"
+      }
+    },
+    {
+      "id": "flexible_trust_structure",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "dynasty_planning"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "dynasty_slat_planning",
+        "FALSE": "term_slat_planning"
+      }
+    },
+    {
+      "id": "dynasty_slat_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "charitable_integration"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "charitable_lead_annuity_trust",
+        "FALSE": "standard_dynasty_slat"
+      }
+    },
+    {
+      "id": "charitable_lead_annuity_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "charitable", "deduction_benefit"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "clat_with_wealth_replacement",
+        "FALSE": "standard_clat_planning"
+      }
+    },
+    {
+      "id": "clat_with_wealth_replacement",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "life_insurance_integration"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "wealth_replacement_trust",
+        "FALSE": "standard_wealth_replacement"
+      }
+    },
+    {
+      "id": "wealth_replacement_trust",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "irrevocable_life_insurance"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "ilit_planning",
+        "FALSE": "standard_life_insurance_planning"
+      }
+    },
+    {
+      "id": "ilit_planning",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "premium_financing"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "premium_financing_strategy",
+        "FALSE": "standard_ilit_planning"
+      }
+    },
+    {
+      "id": "premium_financing_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "leverage_benefits"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "leveraged_insurance_strategy",
+        "FALSE": "standard_premium_financing"
+      }
+    },
+    {
+      "id": "leveraged_insurance_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "estate_tax_elimination"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "estate_tax_elimination_strategy",
+        "FALSE": "standard_leveraged_strategy"
+      }
+    },
+    {
+      "id": "estate_tax_elimination_strategy",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "wealth_preservation"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "comprehensive_wealth_preservation",
+        "FALSE": "standard_estate_tax_elimination"
+      }
+    },
+    {
+      "id": "comprehensive_wealth_preservation",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "goals", "legacy_maximization"],
+      "operand": "EQUALS",
+      "stringValueToCompare": "true",
+      "options": {
+        "TRUE": "ultimate_legacy_planning",
+        "FALSE": "standard_wealth_preservation"
+      }
+    },
+    {
+      "id": "ultimate_legacy_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "comprehensive_financial_plan"
+    },
+    {
+      "id": "standard_wealth_preservation",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "standard_financial_plan"
+    },
+    {
+      "id": "standard_estate_tax_elimination",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "estate_tax_plan"
+    },
+    {
+      "id": "standard_leveraged_strategy",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "leveraged_insurance_plan"
+    },
+    {
+      "id": "standard_premium_financing",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "premium_financing_plan"
+    },
+    {
+      "id": "standard_ilit_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "life_insurance_plan"
+    },
+    {
+      "id": "standard_wealth_replacement",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "wealth_replacement_plan"
+    },
+    {
+      "id": "standard_clat_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "charitable_trust_plan"
+    },
+    {
+      "id": "standard_dynasty_slat",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "dynasty_trust_plan"
+    },
+    {
+      "id": "term_slat_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "term_trust_plan"
+    },
+    {
+      "id": "charitable_lead_annuity_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "charitable_lead_trust_plan"
+    },
+    {
+      "id": "individual_idgt_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "individual_trust_plan"
+    },
+    {
+      "id": "standard_slat_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "slat_plan"
+    },
+    {
+      "id": "standard_idgt_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "idgt_plan"
+    },
+    {
+      "id": "standard_grat_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "grat_plan"
+    },
+    {
+      "id": "qualified_personal_residence_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "qprt_plan"
+    },
+    {
+      "id": "standard_nevada_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "nevada_trust_plan"
+    },
+    {
+      "id": "delaware_asset_protection_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "delaware_trust_plan"
+    },
+    {
+      "id": "standard_asset_protection",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "asset_protection_plan"
+    },
+    {
+      "id": "standard_liability_protection",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "liability_protection_plan"
+    },
+    {
+      "id": "standard_offshore_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "offshore_trust_plan"
+    },
+    {
+      "id": "conservative_international_strategy",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "conservative_international_plan"
+    },
+    {
+      "id": "compliance_focused_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "compliance_plan"
+    },
+    {
+      "id": "standard_international_compliance",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "international_compliance_plan"
+    },
+    {
+      "id": "domestic_compliance_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "domestic_compliance_plan"
+    },
+    {
+      "id": "domestic_trust_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "domestic_trust_plan"
+    },
+    {
+      "id": "term_trust_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "term_trust_plan"
+    },
+    {
+      "id": "standard_generation_skipping_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "generation_skipping_plan"
+    },
+    {
+      "id": "life_insurance_beneficiary_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "life_insurance_plan"
+    },
+    {
+      "id": "traditional_life_insurance_analysis",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "traditional_life_insurance_plan"
+    },
+    {
+      "id": "self_insurance_strategy",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "self_insurance_plan"
+    },
+    {
+      "id": "standard_life_expectancy_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "life_expectancy_plan"
+    },
+    {
+      "id": "standard_benefit_optimization",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "social_security_plan"
+    },
+    {
+      "id": "restricted_application_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "restricted_application_plan"
+    },
+    {
+      "id": "individual_benefit_optimization",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "individual_social_security_plan"
+    },
+    {
+      "id": "pension_optimization",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "pension_plan"
+    },
+    {
+      "id": "pre_retirement_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "pre_retirement_plan"
+    },
+    {
+      "id": "deferred_compensation_plan",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "deferred_compensation_plan"
+    },
+    {
+      "id": "1031_exchange_analysis",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "1031_exchange_plan"
+    },
+    {
+      "id": "like_kind_exchange_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "like_kind_exchange_plan"
+    },
+    {
+      "id": "cash_charitable_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "cash_charitable_plan"
+    },
+    {
+      "id": "residential_property_trust",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "residential_property_plan"
+    },
+    {
+      "id": "charitable_giving_strategy",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "charitable_giving_plan"
+    },
+    {
+      "id": "investment_management_premium",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "premium_investment_plan"
+    },
+    {
+      "id": "high_net_worth_planning",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "high_net_worth_plan"
+    },
+    {
+      "id": "standard_income_tax",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "standard_tax_plan"
+    },
+    {
+      "id": "high_income_investment",
+      "nodeType": "TERMINAL_NODE",
+      "exitRef": "high_income_investment_plan"
+    },
+    {
+      "id": "business_type",
+      "nodeType": "LIST_CHOICE_NODE",
+      "dataRefPath": ["client", "business", "type"],
+      "options": {
+        "sole_proprietorship": "sole_proprietor_planning",
+        "partnership": "partnership_planning",
+        "llc": "llc_planning",
+        "corporation": "corporation_planning",
+        "s_corporation": "s_corporation_planning"
+      }
+    },
+    {
+      "id": "retirement_age",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "age"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 65,
+      "options": {
+        "TRUE": "post_retirement_planning",
+        "FALSE": "pre_retirement_planning"
+      }
+    },
+    {
+      "id": "estate_value",
+      "nodeType": "BINARY_CHOICE_NODE",
+      "dataRefPath": ["client", "assets", "total"],
+      "operand": "GREATER_THAN",
+      "intValueToCompare": 11000000,
+      "options": {
+        "TRUE": "estate_tax_planning",
+        "FALSE": "standard_estate_planning"
+      }
+    }
+  ]
+} 
