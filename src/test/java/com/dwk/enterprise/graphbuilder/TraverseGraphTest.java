@@ -1,83 +1,106 @@
 package com.dwk.enterprise.graphbuilder;
 
-import com.dwk.enterprise.graphbuilder.interfaces.Customer;
-import com.dwk.enterprise.graphbuilder.interfaces.RulesData;
+import com.dwk.enterprise.graphbuilder.data.NodeResponseRecord;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
-import com.dwk.enterprise.graphbuilder.util.JsonLoader;
 import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
+import com.dwk.enterprise.graphbuilder.validation.GraphValidationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = TestConfig.class)
 class TraverseGraphTest {
 
-    @Autowired
     GraphLoader graphLoader;
     Map<String, Node> graph;
+    String testJson = """
+            {
+                "Customer": {
+                    "firstName": "Bob",
+                    "lastName": "Dole",
+                    "age": 90,
+                    "dataType": "Customer",
+                    "addresses": [{"line1": "test"},{"line1": "test2"} ]
+                }
+            }
+            """;
+    String testJsonFalse = """
+            {
+                "Customer": {
+                    "firstName": "Jim",
+                    "lastName": "Dole",
+                    "age": 20,
+                    "dataType": "Customer",
+                    "addresses": [{"line1": "test"},{"line1": "test2"} ]
+                }
+            }
+            """;
 
     @BeforeEach
-    void init() {
-        graphLoader.createGraph("testgraph", JsonLoader.getGraphJson("testgraph"));
-        graph = graphLoader.getGraph("testgraph");
+    void init() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        GraphValidationService validationService = new GraphValidationService(objectMapper);
+        graphLoader = new GraphLoader(validationService);
+        graphLoader.createGraph("test", JsonLoaderForTest.getGraphJsonFromResourcesFolder("test"));
+        graph = graphLoader.getGraph("test");
     }
 
     @Test
     void testGetNextNode() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeA", testJson).nextNodeId();
         Assertions.assertEquals("nodeB", nextNode);
     }
 
     @Test
     void testDecisionNodeA() {
-        Customer customer = new Customer();
-        customer.setAge(21);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJson).nextNodeId();
         Assertions.assertEquals("nodeC", nextNode);
     }
 
     @Test
     void testDecisionNodeB() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJsonFalse).nextNodeId();
         Assertions.assertEquals("nodeD", nextNode);
     }
 
     @Test
     void testBinaryCompareStringTrue() {
-        Customer customer = new Customer();
-        customer.setFirstName("Bob");
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", testJson).nextNodeId();
         Assertions.assertEquals("nodeH", nextNode);
     }
 
     @Test
     void testBinaryCompareFalse() {
-        Customer customer = new Customer();
-        customer.setFirstName("Jim");
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeG", data);
-        Assertions.assertEquals("nodeI", nextNode);
+        NodeResponseRecord nodeResponse = TraverseGraph.getNextNode(graph, "nodeG", testJsonFalse);
+        Assertions.assertEquals("exit", nodeResponse.nextNodeId());
+        Assertions.assertTrue(nodeResponse.graphTraversed());
     }
 
     @Test
     void testBinaryCompareIntTrue() {
-        Customer customer = new Customer();
-        customer.setAge(20);
-        Map<String, RulesData> data = Map.of("Customer", customer);
-        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", data);
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeH", testJsonFalse).nextNodeId();
         Assertions.assertEquals("nodeK", nextNode);
+    }
+
+    @Test
+    void testVisitedNodesEnd() {
+        List<String> nodesVisited = TraverseGraph.nodesVisited(graph, "endNode", testJsonFalse);
+        System.out.println(nodesVisited);
+        Assertions.assertNotEquals(0, nodesVisited.size());
+    }
+
+    @Test
+    void testVisitedNodesNotFound() {
+        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> TraverseGraph.nodesVisited(graph, "nodeC", testJsonFalse));
+        Assertions.assertEquals("Node to check never visited", thrown.getMessage());
     }
 }

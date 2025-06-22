@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GraphbuilderApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(GraphbuilderApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(GraphbuilderApplication.class, args);
+  }
 }
