@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Graph Configuration Schema",
+  "description": "Schema for defining graph-based decision flow configurations",
+  "type": "object",
+  "required": ["flow"],
+  "properties": {
+    "flow": {
+      "type": "array",
+      "description": "Array of nodes defining the graph flow",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Node"
+      }
+    }
+  },
+  "definitions": {
+    "Node": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the node",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "nodeType": {
+          "type": "string",
+          "enum": ["STANDARD_NODE", "BINARY_CHOICE_NODE", "LIST_CHOICE_NODE", "COMPLEX_DECISION_NODE", "TERMINAL_NODE"],
+          "default": "STANDARD_NODE",
+          "description": "Type of the node determining its behavior"
+        },
+        "next": {
+          "type": "string",
+          "description": "ID of the next node to traverse to (required for STANDARD_NODE)",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "options": {
+          "type": "object",
+          "description": "Mapping of option keys to next node IDs",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "ruleName": {
+          "type": "string",
+          "description": "Name of the custom rule to use (required for COMPLEX_DECISION_NODE)",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "intValueToCompare": {
+          "type": "integer",
+          "description": "Integer value to compare against (for BINARY_CHOICE_NODE)"
+        },
+        "stringValueToCompare": {
+          "type": "string",
+          "description": "String value to compare against (for BINARY_CHOICE_NODE)"
+        },
+        "doubleValueToCompare": {
+          "type": "number",
+          "description": "Double value to compare against (for BINARY_CHOICE_NODE)"
+        },
+        "dataRefPath": {
+          "type": "array",
+          "description": "JSON path to the data field to compare",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "operand": {
+          "type": "string",
+          "enum": ["EQUALS", "GREATER_THAN", "LESS_THAN", "NOT_EQUALS", "GREATER_OR_EQUALS"],
+          "description": "Comparison operator (required for BINARY_CHOICE_NODE)"
+        },
+        "exitRef": {
+          "type": "string",
+          "description": "Exit reference for terminal nodes (required for TERMINAL_NODE)"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "nodeType": {
+                "const": "STANDARD_NODE"
+              }
+            }
+          },
+          "then": {
+            "required": ["next"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "nodeType": {
+                "const": "BINARY_CHOICE_NODE"
+              }
+            }
+          },
+          "then": {
+            "required": ["options", "dataRefPath", "operand"],
+            "properties": {
+              "options": {
+                "type": "object",
+                "required": ["TRUE", "FALSE"],
+                "properties": {
+                  "TRUE": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9_-]+$"
+                  },
+                  "FALSE": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9_-]+$"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "nodeType": {
+                "const": "LIST_CHOICE_NODE"
+              }
+            }
+          },
+          "then": {
+            "required": ["options", "dataRefPath"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "nodeType": {
+                "const": "COMPLEX_DECISION_NODE"
+              }
+            }
+          },
+          "then": {
+            "required": ["options", "ruleName"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "nodeType": {
+                "const": "TERMINAL_NODE"
+              }
+            }
+          },
+          "then": {
+            "required": ["exitRef"]
+          }
+        }
+      ]
+    }
+  }
+} 

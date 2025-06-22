@@ -1,0 +1,11 @@
+---
+description: 
+globs: *java
+alwaysApply: false
+---
+Use data driven design where possible
+Prefer functional code
+Avoid side effects in methods
+Keep methods small
+
+Code to Interfaces

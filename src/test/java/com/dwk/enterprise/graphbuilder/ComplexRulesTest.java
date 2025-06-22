@@ -27,6 +27,18 @@ public class ComplexRulesTest {
             }
             """;
 
+    String testJsonB = """
+            {
+                "Customer": {
+                    "firstName": "Bobby",
+                    "lastName": "Dole",
+                    "age": 12,
+                    "dataType": "Customer",
+                    "addresses": [{"line1": "test"},{"line1": "test2"} ]
+                }
+            }
+            """;
+
     @BeforeEach
     void init() {
         Map<String, CustomRule> customRuleMap = Map.of("TestRule", new TestRule());
@@ -35,9 +47,15 @@ public class ComplexRulesTest {
     }
 
     @Test
-    void testDecisionNodeA() {
+    void testDecisionNodeB_NavigateToC() {
         String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJson).nextNodeId();
         Assertions.assertEquals("nodeC", nextNode);
+    }
+
+    @Test
+    void testDecisionNodeB_NavigateToD() {
+        String nextNode = TraverseGraph.getNextNode(graph, "nodeB", testJsonB).nextNodeId();
+        Assertions.assertEquals("nodeD ", nextNode);
     }
 
 }

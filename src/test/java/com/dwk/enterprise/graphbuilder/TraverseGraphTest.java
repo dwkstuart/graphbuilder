@@ -4,16 +4,23 @@ import com.dwk.enterprise.graphbuilder.data.NodeResponseRecord;
 import com.dwk.enterprise.graphbuilder.nodes.Node;
 import com.dwk.enterprise.graphbuilder.util.GraphLoader;
 import com.dwk.enterprise.graphbuilder.util.TraverseGraph;
+import com.dwk.enterprise.graphbuilder.validation.GraphValidationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Map;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = TestConfig.class)
 class TraverseGraphTest {
 
-    GraphLoader graphLoader = new GraphLoader();
+    GraphLoader graphLoader;
     Map<String, Node> graph;
     String testJson = """
             {
@@ -39,7 +46,10 @@ class TraverseGraphTest {
             """;
 
     @BeforeEach
-    void init() {
+    void init() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        GraphValidationService validationService = new GraphValidationService(objectMapper);
+        graphLoader = new GraphLoader(validationService);
         graphLoader.createGraph("test", JsonLoaderForTest.getGraphJsonFromResourcesFolder("test"));
         graph = graphLoader.getGraph("test");
     }

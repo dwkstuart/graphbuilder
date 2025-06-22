@@ -5,7 +5,9 @@ import com.dwk.enterprise.graphbuilder.data.GraphDto;
 import com.dwk.enterprise.graphbuilder.data.NodeDto;
 import com.dwk.enterprise.graphbuilder.nodes.*;
 import com.dwk.enterprise.graphbuilder.rule.CustomRule;
+import com.dwk.enterprise.graphbuilder.validation.GraphValidationService;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,13 +15,29 @@ import java.util.List;
 import java.util.Map;
 
 
+@Slf4j
 public class GraphLoader {
 
-
+    private final GraphValidationService validationService;
     private Map<String, Map<String, Node>> graphs;
     private Map<String, CustomRule> customRuleMap;
 
+    public GraphLoader(GraphValidationService validationService) {
+        this.validationService = validationService;
+    }
+
     public void createGraph(String graphName, String graphJson) {
+        log.info("Creating graph: {}", graphName);
+        
+        // Validate the graph configuration
+        try {
+            validationService.validateGraphJson(graphJson);
+            log.debug("Graph validation passed for: {}", graphName);
+        } catch (Exception e) {
+            log.error("Graph validation failed for {}: {}", graphName, e.getMessage());
+            throw e;
+        }
+        
         Gson gson = new Gson();
         GraphDto dtoList = gson.fromJson(graphJson, GraphDto.class);
 
@@ -40,10 +58,22 @@ public class GraphLoader {
             graphs = new HashMap<>();
         }
         graphs.put(graphName, nodeMap);
+        log.info("Graph '{}' created successfully with {} nodes", graphName, nodeMap.size());
 
     }
 
     public void createGraph(String graphName, String graphJson, Map<String, CustomRule> customRuleMap) {
+        log.info("Creating graph: {} with custom rules", graphName);
+        
+        // Validate the graph configuration
+        try {
+            validationService.validateGraphJson(graphJson);
+            log.debug("Graph validation passed for: {}", graphName);
+        } catch (Exception e) {
+            log.error("Graph validation failed for {}: {}", graphName, e.getMessage());
+            throw e;
+        }
+        
         Gson gson = new Gson();
         GraphDto dtoList = gson.fromJson(graphJson, GraphDto.class);
 
@@ -63,12 +93,17 @@ public class GraphLoader {
             graphs = new HashMap<>();
         }
         graphs.put(graphName, nodeMap);
+        log.info("Graph '{}' created successfully with {} nodes and custom rules", graphName, nodeMap.size());
 
     }
 
 
     public Map<String, Node> getGraph(String graphName) {
-        return graphs.get(graphName);
+        Map<String, Node> graph = graphs.get(graphName);
+        if (graph == null) {
+            log.warn("Graph '{}' not found", graphName);
+        }
+        return graph;
     }
 
 

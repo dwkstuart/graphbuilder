@@ -1,0 +1,22 @@
+package com.dwk.enterprise.graphbuilder;
+
+import com.dwk.enterprise.graphbuilder.validation.GraphValidationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+
+@TestConfiguration
+public class TestConfig {
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
+    public GraphValidationService graphValidationService(ObjectMapper objectMapper) throws Exception {
+        return new GraphValidationService(objectMapper);
+    }
+} 
