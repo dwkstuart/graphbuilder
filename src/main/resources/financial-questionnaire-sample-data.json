@@ -1,0 +1,605 @@
+{
+  "sample_clients": {
+    "ultra_high_net_worth_client": {
+      "client": {
+        "type": "individual",
+        "income": {
+          "annual": 2500000
+        },
+        "assets": {
+          "liquid": 15000000,
+          "total": 50000000,
+          "business_ownership": 25000000,
+          "real_estate": 10000000,
+          "appreciating": true,
+          "exemption_amount": 15000000,
+          "long_term_care": 0,
+          "foreign_accounts": 500000
+        },
+        "goals": {
+          "legacy": true,
+          "charitable": true,
+          "wealth_transfer": true,
+          "income_tax_benefits": true,
+          "flexibility": true,
+          "dynasty_planning": true,
+          "charitable_integration": true,
+          "deduction_benefit": true,
+          "life_insurance_integration": true,
+          "irrevocable_life_insurance": true,
+          "premium_financing": true,
+          "leverage_benefits": true,
+          "estate_tax_elimination": true,
+          "wealth_preservation": true,
+          "legacy_maximization": true
+        },
+        "family": {
+          "children": 3,
+          "generation_skipping": true
+        },
+        "business": {
+          "employees": 150,
+          "valuation": 25000000
+        },
+        "tax": {
+          "bracket": 37,
+          "capital_gains": 5000000
+        },
+        "real_estate": {
+          "commercial": 8000000,
+          "depreciation": 2000000
+        },
+        "timeline": {
+          "sale_planned": 2
+        },
+        "goals": {
+          "income_stream": true
+        },
+        "age": 58,
+        "retirement": {
+          "social_security": 45000
+        },
+        "marital_status": "married",
+        "spouse": {
+          "age": 55
+        },
+        "goals": {
+          "maximize_benefits": true
+        },
+        "health": {
+          "life_expectancy": 90,
+          "pre_existing_conditions": false
+        },
+        "jurisdiction": {
+          "trust_friendly": true,
+          "asset_protection_friendly": true
+        },
+        "compliance": {
+          "fbar_requirements": true
+        },
+        "risk_tolerance": {
+          "international": 8
+        },
+        "profession": {
+          "high_risk": true
+        },
+        "insurance": {
+          "malpractice": 2000000
+        },
+        "goals": {
+          "creditor_protection": true,
+          "income_tax_optimization": true
+        },
+        "charitable": {
+          "deduction_benefit": true
+        }
+      }
+    },
+    "high_income_professional": {
+      "client": {
+        "type": "individual",
+        "income": {
+          "annual": 750000
+        },
+        "assets": {
+          "liquid": 3000000,
+          "total": 8000000,
+          "business_ownership": 0,
+          "real_estate": 2000000,
+          "appreciating": true,
+          "exemption_amount": 8000000,
+          "long_term_care": 0,
+          "foreign_accounts": 0
+        },
+        "goals": {
+          "legacy": true,
+          "charitable": false,
+          "wealth_transfer": true,
+          "income_tax_benefits": true,
+          "flexibility": true,
+          "dynasty_planning": false,
+          "charitable_integration": false,
+          "deduction_benefit": false,
+          "life_insurance_integration": false,
+          "irrevocable_life_insurance": false,
+          "premium_financing": false,
+          "leverage_benefits": false,
+          "estate_tax_elimination": false,
+          "wealth_preservation": true,
+          "legacy_maximization": false
+        },
+        "family": {
+          "children": 2,
+          "generation_skipping": false
+        },
+        "business": {
+          "employees": 0,
+          "valuation": 0
+        },
+        "tax": {
+          "bracket": 37,
+          "capital_gains": 500000
+        },
+        "real_estate": {
+          "commercial": 0,
+          "depreciation": 0
+        },
+        "timeline": {
+          "sale_planned": 0
+        },
+        "goals": {
+          "income_stream": false
+        },
+        "age": 45,
+        "retirement": {
+          "social_security": 0
+        },
+        "marital_status": "married",
+        "spouse": {
+          "age": 42
+        },
+        "goals": {
+          "maximize_benefits": false
+        },
+        "health": {
+          "life_expectancy": 85,
+          "pre_existing_conditions": false
+        },
+        "jurisdiction": {
+          "trust_friendly": false,
+          "asset_protection_friendly": false
+        },
+        "compliance": {
+          "fbar_requirements": false
+        },
+        "risk_tolerance": {
+          "international": 5
+        },
+        "profession": {
+          "high_risk": true
+        },
+        "insurance": {
+          "malpractice": 1000000
+        },
+        "goals": {
+          "creditor_protection": true,
+          "income_tax_optimization": true
+        },
+        "charitable": {
+          "deduction_benefit": false
+        }
+      }
+    },
+    "standard_income_client": {
+      "client": {
+        "type": "individual",
+        "income": {
+          "annual": 75000
+        },
+        "assets": {
+          "liquid": 50000,
+          "total": 300000,
+          "business_ownership": 0,
+          "real_estate": 200000,
+          "appreciating": false,
+          "exemption_amount": 300000,
+          "long_term_care": 0,
+          "foreign_accounts": 0
+        },
+        "goals": {
+          "legacy": false,
+          "charitable": false,
+          "wealth_transfer": false,
+          "income_tax_benefits": false,
+          "flexibility": false,
+          "dynasty_planning": false,
+          "charitable_integration": false,
+          "deduction_benefit": false,
+          "life_insurance_integration": false,
+          "irrevocable_life_insurance": false,
+          "premium_financing": false,
+          "leverage_benefits": false,
+          "estate_tax_elimination": false,
+          "wealth_preservation": false,
+          "legacy_maximization": false
+        },
+        "family": {
+          "children": 1,
+          "generation_skipping": false
+        },
+        "business": {
+          "employees": 0,
+          "valuation": 0
+        },
+        "tax": {
+          "bracket": 22,
+          "capital_gains": 0
+        },
+        "real_estate": {
+          "commercial": 0,
+          "depreciation": 0
+        },
+        "timeline": {
+          "sale_planned": 0
+        },
+        "goals": {
+          "income_stream": false
+        },
+        "age": 35,
+        "retirement": {
+          "social_security": 0
+        },
+        "marital_status": "married",
+        "spouse": {
+          "age": 32
+        },
+        "goals": {
+          "maximize_benefits": false
+        },
+        "health": {
+          "life_expectancy": 80,
+          "pre_existing_conditions": false
+        },
+        "jurisdiction": {
+          "trust_friendly": false,
+          "asset_protection_friendly": false
+        },
+        "compliance": {
+          "fbar_requirements": false
+        },
+        "risk_tolerance": {
+          "international": 3
+        },
+        "profession": {
+          "high_risk": false
+        },
+        "insurance": {
+          "malpractice": 0
+        },
+        "goals": {
+          "creditor_protection": false,
+          "income_tax_optimization": false
+        },
+        "charitable": {
+          "deduction_benefit": false
+        }
+      }
+    },
+    "business_owner": {
+      "client": {
+        "type": "business",
+        "business": {
+          "type": "corporation",
+          "employees": 25,
+          "valuation": 5000000
+        },
+        "income": {
+          "annual": 500000
+        },
+        "assets": {
+          "liquid": 1000000,
+          "total": 8000000,
+          "business_ownership": 5000000,
+          "real_estate": 2000000,
+          "appreciating": true,
+          "exemption_amount": 8000000,
+          "long_term_care": 0,
+          "foreign_accounts": 0
+        },
+        "goals": {
+          "legacy": true,
+          "charitable": false,
+          "wealth_transfer": true,
+          "income_tax_benefits": true,
+          "flexibility": true,
+          "dynasty_planning": false,
+          "charitable_integration": false,
+          "deduction_benefit": false,
+          "life_insurance_integration": false,
+          "irrevocable_life_insurance": false,
+          "premium_financing": false,
+          "leverage_benefits": false,
+          "estate_tax_elimination": false,
+          "wealth_preservation": true,
+          "legacy_maximization": false
+        },
+        "family": {
+          "children": 2,
+          "generation_skipping": false
+        },
+        "tax": {
+          "bracket": 37,
+          "capital_gains": 1000000
+        },
+        "real_estate": {
+          "commercial": 1500000,
+          "depreciation": 500000
+        },
+        "timeline": {
+          "sale_planned": 5
+        },
+        "goals": {
+          "income_stream": true
+        },
+        "age": 55,
+        "retirement": {
+          "social_security": 30000
+        },
+        "marital_status": "married",
+        "spouse": {
+          "age": 52
+        },
+        "goals": {
+          "maximize_benefits": true
+        },
+        "health": {
+          "life_expectancy": 85,
+          "pre_existing_conditions": false
+        },
+        "jurisdiction": {
+          "trust_friendly": true,
+          "asset_protection_friendly": true
+        },
+        "compliance": {
+          "fbar_requirements": false
+        },
+        "risk_tolerance": {
+          "international": 6
+        },
+        "profession": {
+          "high_risk": true
+        },
+        "insurance": {
+          "malpractice": 1500000
+        },
+        "goals": {
+          "creditor_protection": true,
+          "income_tax_optimization": true
+        },
+        "charitable": {
+          "deduction_benefit": false
+        }
+      }
+    },
+    "retirement_client": {
+      "client": {
+        "type": "retirement",
+        "age": 70,
+        "income": {
+          "annual": 120000
+        },
+        "assets": {
+          "liquid": 2000000,
+          "total": 4000000,
+          "business_ownership": 0,
+          "real_estate": 500000,
+          "appreciating": false,
+          "exemption_amount": 4000000,
+          "long_term_care": 0,
+          "foreign_accounts": 0
+        },
+        "goals": {
+          "legacy": true,
+          "charitable": false,
+          "wealth_transfer": true,
+          "income_tax_benefits": false,
+          "flexibility": false,
+          "dynasty_planning": false,
+          "charitable_integration": false,
+          "deduction_benefit": false,
+          "life_insurance_integration": false,
+          "irrevocable_life_insurance": false,
+          "premium_financing": false,
+          "leverage_benefits": false,
+          "estate_tax_elimination": false,
+          "wealth_preservation": true,
+          "legacy_maximization": false
+        },
+        "family": {
+          "children": 3,
+          "generation_skipping": false
+        },
+        "business": {
+          "employees": 0,
+          "valuation": 0
+        },
+        "tax": {
+          "bracket": 24,
+          "capital_gains": 0
+        },
+        "real_estate": {
+          "commercial": 0,
+          "depreciation": 0
+        },
+        "timeline": {
+          "sale_planned": 0
+        },
+        "goals": {
+          "income_stream": true
+        },
+        "retirement": {
+          "social_security": 45000
+        },
+        "marital_status": "married",
+        "spouse": {
+          "age": 68
+        },
+        "goals": {
+          "maximize_benefits": true
+        },
+        "health": {
+          "life_expectancy": 85,
+          "pre_existing_conditions": true
+        },
+        "jurisdiction": {
+          "trust_friendly": false,
+          "asset_protection_friendly": false
+        },
+        "compliance": {
+          "fbar_requirements": false
+        },
+        "risk_tolerance": {
+          "international": 2
+        },
+        "profession": {
+          "high_risk": false
+        },
+        "insurance": {
+          "malpractice": 0
+        },
+        "goals": {
+          "creditor_protection": false,
+          "income_tax_optimization": false
+        },
+        "charitable": {
+          "deduction_benefit": false
+        }
+      }
+    }
+  },
+  "expected_traversal_paths": {
+    "ultra_high_net_worth_client": [
+      "welcome",
+      "client_type",
+      "individual_income",
+      "high_income_tax",
+      "ultra_high_income",
+      "private_wealth_management",
+      "estate_planning_comprehensive",
+      "trust_setup_children",
+      "complex_trust_structure",
+      "business_succession_planning",
+      "esop_planning",
+      "complex_esop_structure",
+      "tax_optimization_strategy",
+      "charitable_remainder_trust",
+      "real_estate_trust",
+      "commercial_property_trust",
+      "depreciation_recapture_strategy",
+      "immediate_sale_strategy",
+      "installment_sale_planning",
+      "structured_settlement_trust",
+      "retirement_income_optimization",
+      "social_security_strategy",
+      "spousal_benefit_optimization",
+      "file_and_suspend_strategy",
+      "advanced_social_security_planning",
+      "longevity_planning",
+      "long_term_care_insurance_analysis",
+      "hybrid_life_insurance_strategy",
+      "irrevocable_life_insurance_trust",
+      "generation_skipping_trust_planning",
+      "dynasty_trust_planning",
+      "perpetual_trust_structure",
+      "offshore_trust_planning",
+      "international_compliance_planning",
+      "fbar_fatca_compliance",
+      "offshore_tax_optimization",
+      "aggressive_international_strategy",
+      "asset_protection_trust",
+      "professional_liability_protection",
+      "excess_liability_protection",
+      "domestic_asset_protection_trust",
+      "nevada_asset_protection_trust",
+      "nevada_incomplete_gift_trust",
+      "grantor_retained_annuity_trust",
+      "intentionally_defective_grantor_trust",
+      "spousal_lifetime_access_trust",
+      "slat_planning",
+      "flexible_trust_structure",
+      "dynasty_slat_planning",
+      "charitable_lead_annuity_trust",
+      "clat_with_wealth_replacement",
+      "wealth_replacement_trust",
+      "ilit_planning",
+      "premium_financing_strategy",
+      "leveraged_insurance_strategy",
+      "estate_tax_elimination_strategy",
+      "comprehensive_wealth_preservation",
+      "ultimate_legacy_planning"
+    ],
+    "high_income_professional": [
+      "welcome",
+      "client_type",
+      "individual_income",
+      "high_income_tax",
+      "ultra_high_income",
+      "high_net_worth_planning"
+    ],
+    "standard_income_client": [
+      "welcome",
+      "client_type",
+      "individual_income",
+      "standard_income_tax"
+    ],
+    "business_owner": [
+      "welcome",
+      "client_type",
+      "business_type",
+      "corporation_planning"
+    ],
+    "retirement_client": [
+      "welcome",
+      "client_type",
+      "retirement_age",
+      "post_retirement_planning"
+    ]
+  },
+  "stack_overflow_risk_analysis": {
+    "ultra_high_net_worth_client": {
+      "decision_nodes_in_path": 45,
+      "stack_depth": 45,
+      "stack_usage_bytes": 2880,
+      "risk_level": "CRITICAL",
+      "recommendation": "Use iterative implementation"
+    },
+    "high_income_professional": {
+      "decision_nodes_in_path": 6,
+      "stack_depth": 6,
+      "stack_usage_bytes": 384,
+      "risk_level": "LOW",
+      "recommendation": "Safe for recursive implementation"
+    },
+    "standard_income_client": {
+      "decision_nodes_in_path": 2,
+      "stack_depth": 2,
+      "stack_usage_bytes": 128,
+      "risk_level": "VERY_LOW",
+      "recommendation": "Safe for recursive implementation"
+    },
+    "business_owner": {
+      "decision_nodes_in_path": 3,
+      "stack_depth": 3,
+      "stack_usage_bytes": 192,
+      "risk_level": "VERY_LOW",
+      "recommendation": "Safe for recursive implementation"
+    },
+    "retirement_client": {
+      "decision_nodes_in_path": 2,
+      "stack_depth": 2,
+      "stack_usage_bytes": 128,
+      "risk_level": "VERY_LOW",
+      "recommendation": "Safe for recursive implementation"
+    }
+  }
+} 
